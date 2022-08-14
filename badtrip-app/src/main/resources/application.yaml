@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  h2:
+    console:
+      path: /h2
+      enabled: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    contexts: audit
+    default-schema: public
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: validate
