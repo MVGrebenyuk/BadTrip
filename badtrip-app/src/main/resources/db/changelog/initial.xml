@@ -7,7 +7,11 @@
 
     <changeSet id="0.0.1" author="mvgrebenyuk">
         <sql>
-            CREATE TABLE TRIP (id uuid PRIMARY KEY, title varchar, short_title varchar,
+            CREATE TABLE TRIP (
+                id uuid PRIMARY KEY,
+                title varchar,
+                short_title varchar,
+                author uuid,
             creation_date timestamp, updated_date timestamp);
         </sql>
     </changeSet>

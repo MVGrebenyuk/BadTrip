@@ -24,6 +24,8 @@ public class Trip {
 
     private String shortTitle;
 
+    private UUID author;
+
     @CreationTimestamp
     private LocalDateTime creationDate;
 
