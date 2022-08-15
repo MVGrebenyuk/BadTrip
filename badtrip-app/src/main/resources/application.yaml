@@ -13,3 +13,7 @@ spring:
     database: h2
     hibernate:
       ddl-auto: validate
+  datasource:
+    username:
+    password:
+    driver-class-name: org.h2.Driver
