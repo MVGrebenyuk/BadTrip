@@ -8,18 +8,16 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Table(name = "passwords")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_details")
-public class UserDetails {
+public class Password {
 
     @Id
     private UUID id;
 
-    private String avatar;
-
-    private String aboutMe;
+    private String password;
 
     @OneToOne
     @JoinColumn(name = "user_id")
