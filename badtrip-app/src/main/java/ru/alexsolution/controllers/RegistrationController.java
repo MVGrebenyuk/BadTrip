@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.alexsolution.dto.RegistrationDto;
 import ru.alexsolution.services.UserService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/registration")
 @RequiredArgsConstructor
@@ -15,7 +17,7 @@ public class RegistrationController {
     private final UserService userService;
 
     @PostMapping
-    public void registration(@RequestBody RegistrationDto registrationDto){
+    public void registration(@Valid @RequestBody RegistrationDto registrationDto){
         userService.saveNewUser(registrationDto);
     }
 
