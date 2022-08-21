@@ -1,65 +1,446 @@
-<!doctype html>
-
-<html ng-app="market-front">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+    <!-- Title -->
+    <title>WannaGo</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive/responsive.css" rel="stylesheet">
+
 </head>
 
 <body>
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="yummy-load"></div>
+    </div>
 
-<div class="container" ng-controller="indexController">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#!/">Spring Web Application</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#!/store">Каталог товаров</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#!/cart">Корзина</a>
-                </li>
-
-                <li class="nav-item" ng-show="!isUserLoggedIn()">
-                    <form class="align-middle" ng-submit="tryToAuth()">
-                        <div class="input-group input-group-sm" style="padding: 4px;">
-                            <input id="navLoginField" class="form-control" ng-model="user.username" type="text"
-                                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
-
-                            <input id="navPasswordField" class="form-control" ng-model="user.password" type="password"
-                                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
-
-                            <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm"
-                                    style="margin-left: 10px;" type="submit">Войти
-                            </button>
+    <!-- ****** Header Area Start ****** -->
+    <header class="header_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="top_header_area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <!--  Top Social bar start -->
+                                    <div class="top_social_bar">
+                                        <div class="logo_area text-center">
+                                            <a href="index.html" class="yummy-logo">WannaGo</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <nav class="navbar navbar-expand-lg">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav" aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars" aria-hidden="true"></i> Menu</button>
+                                    <!-- Menu Area Start -->
+                                    <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
+                                        <ul class="navbar-nav" id="yummy-nav">
+                                            <li class="nav-item">
+                                                <div class="d5">
+                                                    <form">
+                                                        <input type="hidden" name="searchid" value="808327">
+                                                        <input type="search" name="text" required placeholder="Поиск по сайту" style="
+                                                      padding: 5px 2px 5px 25px;
+                                                      background: url('http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s25/search.png') no-repeat scroll 0 50%;
+                                                      border-radius: 10px;
+                                                      border: 1px solid #1A1919;
+                                                      ">
+                                                      </form>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="index.html">Главная <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="archive.html">Блог</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                                <!--  Login Register Area -->
+                                <div class="col-7 col-sm-2">
+                                    <div class="signup-search-area d-flex align-items-center justify-content-end">
+                                        <div class="login_register_area d-flex">
+                                            <div class="login/Registration">
+                                                <button class="btn btn-submit login_register" data-toggle="modal" data-target="#myModal">Вход/Регистрация</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </li>
-                <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
-                    <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
-                </li>
-            </ul>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
-    </nav>
+    </header>
+    <!-- ****** Header Area End ****** -->
 
-    <ng-view></ng-view>
+<!-- user-modal -->
 
-    <script src="index.js"></script>
-    <script src="store/store.js"></script>
-    <script src="cart/cart.js"></script>
-    <script src="welcome/welcome.js"></script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <div class="col-md-12"><img class="head-icon" src="img/icons/WannaGo.png"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="login"><a href="#Login" data-toggle="tab">Вход</a></li>
+                <li class="login"><a href="#Registration" data-toggle="tab">Регистрация</a></li>
+            </ul>
+            <div class="modal-body" style="position: center;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-14 control-label">
+                                        Вход по логину</label>
+                                    <div class="col-sm-14">
+                                        <input type="email" class="form-control" id="email1" placeholder="Логин" />
+                                    </div>
+                                </div>
+                                <div class="qwe"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-14">
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-submit btn-lg btn-block">Войти</button>
+
+                                        <div><a href="#" class="forgot">Забыли пароль?</a></div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="email" class="col-sm-10 control-label">Логин</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="Логин" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-10 control-label">
+                                        Почта</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="email" placeholder="Почта" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-10 control-label">
+                                        Пароль</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" placeholder="Пароль" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile" class="col-sm-10 control-label">
+                                        Повторите пароль</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" placeholder="Повторите пароль" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile" class="col-sm-10 control-label">
+                                        О себе</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="foru" placeholder="О себе" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-submit btn-lg btn-block">Зарегистрироваться</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <div class="sign-with-social">Войти через соцсети</div>
+                            </div>
+                        <div class="col-md-12">
+                        <img class="icons" src="img/icons/google.png">
+                        <img class="icons" src="img/icons/vk.png">
+                        <img class="icons" src="img/icons/ok.png">
+                        <img class="icons" src="img/icons/gs.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- enduser modal -->
 
+    <!-- ****** Blog Area Start ****** -->
+    <section class="blog_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="blog-sidebar">
+                        <!-- Single Widget Area -->
+                        <div class="blog-logo-area text-center">
+                            <div class="about-me-widget-thumb">
+                                <p class="blog-logo">WannaGo</p>
+                            </div>
+                        </div>
+
+                        <!-- Single Widget Area -->
+                        <div class="description-area">
+                            <div class="widget-title">
+                                <h1 class="post-headline">Заголовок</h2>
+                                <p class="description">В целом, конечно, повышение уровня гражданского сознания обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствующей насущным потребностям.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ****** Blog Sidebar ****** -->
+            </div>
+        </div>
+    </section>
+    <!-- ****** Blog Area End ****** -->
+
+    <!-- ****** Blog Area Start ****** -->
+    <section class="blog_area section_padding_0_80">
+        <div class="container">
+            <h2 class="post-headline">Следуй маршруту профи</h2>
+            <div class="row">
+                <div class="post-content col-md-4">
+                    <div>
+                        <h4>Преимущество 1</h4>
+                        <p>В целом, конечно, повышение уровня гражданского сознания обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствующей насущным потребностям.</p>
+                    </div>
+                    <div>
+                        <h4>Преимущество 2</h4>
+                        <p>В целом, конечно, повышение уровня гражданского сознания обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствующей насущным потребностям.</p>
+                    </div>
+                    <div>
+                        <h4>Преимущество 3</h4>
+                        <p>В целом, конечно, повышение уровня гражданского сознания обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствующей насущным потребностям.</p>
+                    </div>
+                </div>
+                <div class="post-content col-md-8">
+                    <img class="icons" src="img/icons/Rec.png">
+                </div>
+                <!-- ****** Blog Sidebar ****** -->
+            </div>
+        </div>
+    </section>
+    <!-- ****** Blog Area End ****** -->
+
+    <!-- ****** Instagram Area Start ****** -->
+    <div class="popular-routes text-center">
+        <p class="yummy-logo">Популярные маршруты</p>
+    </div>
+    <div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/1.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/2.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/3.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/4.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/5.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/6.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/1.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Item -->
+        <div class="instagram_gallery_item">
+            <!-- Instagram Thumb -->
+            <img src="img/instagram-img/2.jpg" alt="">
+            <!-- Hover -->
+            <div class="hover_overlay">
+                <div class="yummy-table">
+                    <div class="yummy-table-cell">
+                        <div class="follow-me text-center">
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ****** Our Creative Portfolio Area End ****** -->
+
+    <!-- ****** Footer Menu Area Start ****** -->
+    <footer class="footer_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-content">
+                        <!-- Logo Area Start -->
+                        <div class="footer-logo-area text-center">
+                            <p class="yummy-logo">WannaGo</p>
+                        </div>
+                        <!-- Menu Area Start -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="footer-social-area d-flex">
+                                    <div class="single-icon">
+                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i><span>facebook</span></a>
+                                    </div>
+                                    <div class="single-icon">
+                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Twitter</span></a>
+                                    </div>
+                                    <div class="single-icon">
+                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
+                                    </div>
+                                    <div class="single-icon">
+                                        <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i><span>YOUTUBE</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ****** Footer Menu Area End ****** -->
+
+    <!-- Jquery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap-4 js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins JS -->
+    <script src="js/others/plugins.js"></script>
+    <!-- Active JS -->
+    <script src="js/active.js"></script>
 </body>
-</html>
