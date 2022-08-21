@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 @Data
-public class CreateTripDto {
+public class TripDto {
 
     private UUID id;
 

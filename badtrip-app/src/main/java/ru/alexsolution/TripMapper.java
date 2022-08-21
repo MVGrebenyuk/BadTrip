@@ -1,14 +1,14 @@
 package ru.alexsolution;
 
 import org.mapstruct.Mapper;
-import ru.alexsolution.dto.CreateTripDto;
+import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
 
 @Mapper(componentModel = "WannaGo")
 public interface TripMapper {
 
-    Trip toTrip(CreateTripDto createTripDto);
+    Trip toTrip(TripDto createTripDto);
 
-    CreateTripDto toCreateTripDto(Trip trip);
+    TripDto toCreateTripDto(Trip trip);
 
 }

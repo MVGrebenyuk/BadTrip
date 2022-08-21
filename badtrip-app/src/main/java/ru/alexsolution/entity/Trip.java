@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -27,7 +25,9 @@ public class Trip {
 
     private String shortTitle;
 
-    private UUID author;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
 
     private String region;
 
