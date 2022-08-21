@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.alexsolution.converters.UserConverter;
 import ru.alexsolution.dto.RegistrationDto;
 import ru.alexsolution.entity.Password;
 import ru.alexsolution.entity.Role;
@@ -28,6 +29,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleRepository roleRepository;
+    private final UserConverter userConverter;
 
     public Optional<User> findByLogin(String username) {
         return userRepository.findByLogin(username);
@@ -46,17 +48,8 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void saveNewUser(RegistrationDto registrationDto) {
-        User user = User.builder()
-                .id(UUID.randomUUID())
-                .login(registrationDto.getLogin())
-                .city(registrationDto.getCity())
-                .firstName(registrationDto.getFirstName())
-                .lastName(registrationDto.getLastName())
-                .roles(roleRepository.findAllByName("ROLE_USER"))
-                .dateOfBirth(registrationDto.getDateOfBirth())
-                .build();
+        User user = userConverter.DtoToEntity(registrationDto);
         userRepository.save(user);
-
         user.setPassword(new Password(UUID.randomUUID(), bCryptPasswordEncoder.encode(registrationDto.getPassword()), user));
         user.setUserDetails(new ru.alexsolution.entity.UserDetails(UUID.randomUUID(), registrationDto.getAvatar(), registrationDto.getAboutMe(), user));
         userRepository.save(user);
