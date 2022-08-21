@@ -1,0 +1,484 @@
+/* ***** Fonts ***** */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700|Quicksand:300,400,500,700|Shadows+Into+Light+Two');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+/* ***** Import CSS ***** */
+
+@import 'css/bootstrap/bootstrap.min.css';
+@import 'css/others/animate.css';
+@import 'css/others/magnific-popup.css';
+@import 'css/others/meanmenu.min.css';
+@import 'css/others/owl.carousel.min.css';
+@import 'css/others/font-awesome.min.css';
+@import 'css/others/pe-icon-7-stroke.css';
+
+.modal-content {
+    width: 420px;
+}
+
+.nav-tabs {
+    margin-bottom: 4px;
+}
+
+.nav-tabs li {
+    margin-right: 28px;
+}
+
+.sign-with {
+    padding: 15px;
+}
+
+.sign-with-social {
+    margin-bottom: 20px;
+}
+
+CSS
+.sign-with .sign-with-social {
+    overflow: hidden;
+    text-align: center;
+    font-size: 25px;
+}
+
+.sign-with .sign-with-social:before,
+
+.sign-with .sign-with-social:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 33%;
+    height: 1px;
+    background-color: #000000;
+    position: relative;
+}
+
+.sign-with .sign-with-social:before {
+    margin-left: -100%;
+    left: -14px;
+}
+
+.sign-with .sign-with-social:after {
+    margin-right: -100%;
+    right: -14px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.btn-block {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.btn-submit {
+    border-radius: 10px;
+    background-color: #F88821;
+    color: white;
+}
+
+.modal-header {
+    border-bottom: 0;
+}
+
+.nav-tabs {
+    padding-left: 145px;
+    border-bottom: 0;
+}
+
+.login a {
+    text-decoration:none;
+    display: inline-block;
+    line-height: 1;
+    color:#000;
+}
+
+.login a:hover  {
+    color: #F88821;
+    padding-bottom: 1px;
+    border-bottom: 2px solid #F88821;
+}
+
+.forgot {
+    color: #000;
+    font-size: 12px;
+}
+
+.control-label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    margin-top: 10px;
+}
+
+.icons {
+    margin-right: 20px;
+}
+
+.head-icon {
+    margin-left: 140px;
+    margin-top: 15px;
+}
+
+.qwe {
+    margin: 8px 0 8px 0;
+}
+
+.form-control {
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 10px;
+}
+
+.login_register {
+    margin-top: 20px;
+}
+
+.d5 {
+    margin-top: 10px;
+    margin-right: 80px;
+}
+
+.blog-sidebar {
+}
+
+
+.nav-item {
+    font-family: 'Montserrat';
+    font-weight: 600;
+}
+
+.blog-logo {
+    font-size: 128px;
+    font-family: 'Nunito';
+    font-weight: 800;
+    color: #1ABAA6;
+    width: 613px;
+    height: 175px;
+}
+
+.description-area {
+    width: 380px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    line-height: 19.5px;
+    margin-left: auto;
+}
+
+.description {
+    font-size: 16px;
+}
+
+.post-headline {
+    font-size: 40px;
+}
+
+body {
+    font-family: 'Montserrat';
+    position: relative;
+    z-index: auto;
+}
+
+h1 {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    color: black;
+    line-height: 24.38px;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    color: black;
+    line-height: 48.76px;
+}
+
+p {
+    color: #51545f;
+    font-size: 16px;
+}
+
+#scrollUp {
+    bottom: 55px;
+    font-size: 14px;
+    right: 50%;
+    width: 30px;
+    background-color: #fc6c3f;
+    color: #fff;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-right: -15px;
+}
+
+.yummy-table {
+    display: table;
+    height: 100%;
+    left: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.yummy-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#preloader {
+    overflow: hidden;
+    background-color: #fff;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999;
+}
+
+.yummy-load {
+    -webkit-animation: 2000ms linear 0s normal none infinite running yummy-load;
+    animation: 2000ms linear 0s normal none infinite running yummy-load;
+    background: transparent none repeat scroll 0 0;
+    border-color: #dddddd #dddddd #fc6c3f;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 3px;
+    height: 40px;
+    left: calc(50% - 20px);
+    position: relative;
+    top: calc(50% - 20px);
+    width: 40px;
+    z-index: 9;
+}
+
+@-webkit-keyframes yummy-load {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes yummy-load {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* --------------------
+:: Top Header Area CSS
+-------------------- */
+
+.top_header_area {
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 14px;
+}
+
+.top_header_area .top_social_bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 40px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+
+.top_header_area .top_social_bar > a {
+    font-size: 12px;
+    color: #232d37;
+    margin-right: 30px;
+}
+
+.top_header_area .top_social_bar > a:hover {
+    color: #fc6c3f;
+}
+
+.top_header_area .top_social_bar > a:last-of-type {
+    margin-right: 0;
+}
+
+.top_header_area .signup-search-area {
+    height: 40px;
+    position: relative;
+    z-index: 3;
+}
+
+.top_header_area .signup-search-area a {
+    font-size: 13px;
+    color: #222;
+}
+
+.top_header_area .signup-search-area .login a {
+    margin-right: 13px;
+    border-right: 2px solid #c2c2c2;
+    padding-right: 13px;
+}
+
+.top_header_area .signup-search-area .search_button {
+    margin-left: 54px;
+}
+
+/* --------------------
+:: Menu Area CSS
+-------------------- */
+
+.logo_area .yummy-logo {
+    font-family: 'Nunito';
+    font-weight: 700;
+    font-size: 40px;
+    padding: 30px 0 12px 0;
+    display: inline-block;
+    color: #232d37;
+}
+
+.navbar.navbar-expand-lg {
+    padding: 0;
+}
+
+.navbar.navbar-expand-lg .navbar-nav .nav-link {
+    padding: 25px 30px;
+    color: #232d37;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.navbar.navbar-expand-lg .navbar-nav .nav-link:hover,
+.navbar.navbar-expand-lg .navbar-nav .active .nav-link {
+    color: #fc6c3f;
+}
+
+/* --------------------
+:: Instagram Area CSS 
+-------------------- */
+
+.instagram_gallery_item {
+    position: relative;
+    z-index: 1;
+}
+
+.instagram_gallery_item img {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    width: 100%;
+}
+
+.instagram_gallery_item .hover_overlay {
+    background: rgba(252, 108, 63, 0.7);
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    position: absolute;
+    top: 0;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    width: 100%;
+    z-index: 5;
+}
+
+.instagram_gallery_item:hover .hover_overlay {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+.instagram_gallery_item .follow-me a {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.instargram_area {
+    position: relative;
+    z-index: 1;
+}
+
+.instargram_area .owl-prev {
+    position: absolute;
+    width: 10%;
+    background-color: transparent;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: url(img/core-img/back.png), auto !important;
+    z-index: 9;
+}
+
+.instargram_area .owl-next {
+    position: absolute;
+    width: 10%;
+    background-color: transparent;
+    height: 100%;
+    top: 0;
+    right: 0;
+    cursor: url(img/core-img/next.png), auto !important;
+}
+
+
+/* --------------------
+:: Footer Social Area
+-------------------- */
+
+.footer-social-area {
+    border-bottom: 1px solid #eeeeee;
+    padding: 50px 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between
+}
+
+.single-icon > a {
+    color: #51545f;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.single-icon > a:hover {
+    color: #fc6c3f;
+}
+
+.single-icon > a > i {
+    font-size: 16px;
+    padding-right: 12px;
+}
+
+.footer-content {
+    padding: 50px 0 65px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.footer-logo-area .yummy-logo {
+    font-family: 'Montserrat';
+    font-size: 60px;
+    margin-bottom: 0;
+    padding: 0 0 20px 0;
+    display: inline-block;
+    color: #232d37;
+}
+
+.popular-routes .yummy-logo {
+    font-family: 'Montserrat';
+    font-size: 40px;
+    margin-bottom: 0;
+    padding: 0 0 20px 0;
+    display: inline-block;
+    color: #232d37;
+}
