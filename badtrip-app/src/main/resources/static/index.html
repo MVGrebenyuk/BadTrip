@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WannaGo">>
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,9 @@
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
 </head>
 
 <body>
@@ -28,7 +31,7 @@
     </div>
 
     <!-- ****** Header Area Start ****** -->
-    <header class="header_area">
+    <header class="header_area" ng-controller="mainController">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -74,7 +77,10 @@
                                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                                         <div class="login_register_area d-flex">
                                             <div class="login/Registration">
-                                                <button class="btn btn-submit login_register" data-toggle="modal" data-target="#myModal">Вход/Регистрация</button>
+                                                <button class="btn btn-submit login_register" data-toggle="modal" data-target="#myModal" ng-show="!isUserLoggedIn()">Вход/Регистрация</button>
+                                            </div>
+                                            <div class="login/Registration">
+                                                <button class="btn btn-submit login_register" data-toggle="modal" data-target="#myModal" ng-show="isUserLoggedIn()" ng-click="tryToLogout()">Выход</button>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +97,7 @@
 
 <!-- user-modal -->
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" ng-controller="mainController"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -114,18 +120,18 @@
                                     <label for="email" class="col-sm-14 control-label">
                                         Вход по логину</label>
                                     <div class="col-sm-14">
-                                        <input type="email" class="form-control" id="email1" placeholder="Логин" />
+                                        <input type="text" class="form-control" id="email1" ng-model="user.login" placeholder="Логин" />
                                     </div>
                                 </div>
                                 <div class="qwe"></div>
                                 <div class="form-group">
                                     <div class="col-sm-14">
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль" />
+                                        <input type="password" class="form-control" id="exampleInputPassword1" ng-model="user.password" placeholder="Пароль" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-submit btn-lg btn-block">Войти</button>
+                                        <button type="submit" class="btn btn-submit btn-lg btn-block" ng-click="tryToAuth()">Войти</button>
 
                                         <div><a href="#" class="forgot">Забыли пароль?</a></div>
                                     </div>
@@ -432,7 +438,7 @@
     </footer>
 
     <!-- ****** Footer Menu Area End ****** -->
-
+    <script src="index.js"></script>
     <!-- Jquery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
