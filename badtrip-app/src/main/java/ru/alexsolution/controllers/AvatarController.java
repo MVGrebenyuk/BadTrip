@@ -15,7 +15,7 @@ public class AvatarController {
 
     private final UserService userService;
 
-    @PutMapping
+    @PutMapping("/addAvatar")
     public void addAvatar(Principal principal, MultipartFile multipartFile) throws IOException {
         userService.saveAvatar(principal, multipartFile);
     }

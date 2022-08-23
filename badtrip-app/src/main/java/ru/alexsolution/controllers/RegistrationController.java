@@ -20,5 +20,4 @@ public class RegistrationController {
     public void registration(@Valid @RequestBody RegistrationDto registrationDto){
         userService.saveNewUser(registrationDto);
     }
-
 }
