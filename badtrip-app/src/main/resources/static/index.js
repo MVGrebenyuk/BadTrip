@@ -5,14 +5,6 @@
         .run(run);
 
     function config($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'src/main/resources/static/index.html',
-                controller: 'mainController'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
     }
 
     function run($rootScope, $http, $localStorage) {
