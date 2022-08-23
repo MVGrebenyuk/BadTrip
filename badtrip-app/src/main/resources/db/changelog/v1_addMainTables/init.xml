@@ -50,13 +50,20 @@
                  title varchar,
                  short_title varchar,
                  author uuid references users(id),
+                 region varchar(50),
+                 country varchar(50),
+                 city varchar (50),
+                 level int,
+                 price numeric,
+                 length numeric,
+                 duration time,
                  creation_date timestamp,
                  updated_date timestamp
             );
         </sql>
     </changeSet>
 
-    <changeSet id="0.5" author="">
+    <changeSet id="0.5" author="mvgrebenyuk">
         <sql>
             create table roles
             (
@@ -80,4 +87,26 @@
                    ('ROLE_ADMIN');
         </sql>
     </changeSet>
+
+    <changeSet id="0.6" author="mvgrebenyuk">
+        <sql>
+            CREATE TABLE favorites_to_user (
+                                  trip_id uuid not null references trip(id),
+                                  user_id uuid references users(id),
+                                  primary key (user_id, trip_id)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="0.7" author="mvgrebenyuk">
+        <sql>
+            CREATE TABLE purchased_to_user (
+                                               trip_id uuid not null references trip(id),
+                                               user_id uuid references users(id),
+                                               primary key (user_id, trip_id)
+            );
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
