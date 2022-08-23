@@ -14,6 +14,22 @@
 @import 'css/others/font-awesome.min.css';
 @import 'css/others/pe-icon-7-stroke.css';
 
+/* Отключил выделение текста */
+*{
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.blog_area {
+    background-image: url(./img/back/bgg.png);
+    background-size: 100%;
+    height: 650px;
+}
+
 .modal-content {
     width: 420px;
 }
@@ -47,7 +63,7 @@ CSS
     content: "";
     display: inline-block;
     vertical-align: middle;
-    width: 33%;
+    width: 27.7%;
     height: 1px;
     background-color: #000000;
     position: relative;
@@ -64,16 +80,16 @@ CSS
 }
 
 .form-group {
-    margin-bottom: 0;
+    margin-bottom: 14px;
 }
 
 .btn-block {
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .btn-submit {
-    border-radius: 10px;
+    border-radius: 4px;
     background-color: #F88821;
     color: white;
 }
@@ -82,46 +98,47 @@ CSS
     border-bottom: 0;
 }
 
-.nav-tabs {
-    padding-left: 145px;
-    border-bottom: 0;
+.nav-tabs { 
+    margin: 0 auto 40px auto; 
+    padding-left: 58px; /* Костыль */ 
+    border-bottom: 0; 
+} 
+ 
+.login a { 
+    text-decoration:none; 
+    display: inline-block; 
+    line-height: 1; 
+    color:#000; 
+} 
+ 
+.login > a.active { 
+    color: #F88821; 
+    padding-bottom: 1px; 
+    border-bottom: 2px solid #F88821; 
+} 
+ 
+.login a:hover  { 
+    color: #F88821; 
+    padding-bottom: 1px; 
+    border-bottom: 2px solid #F88821; 
+}
+ 
+.icons { 
+    margin-right: 20px; 
+} 
+
+.forgot { 
+    color: #000; 
+    font-size: 10px; /* изменили размер шрифта на 12 */ 
+} 
+ 
+.control-label-registration { 
+    margin-top: 0; /* убрали маргин */ 
 }
 
-.login a {
-    text-decoration:none;
-    display: inline-block;
-    line-height: 1;
-    color:#000;
-}
-
-.login a:hover  {
-    color: #F88821;
-    padding-bottom: 1px;
-    border-bottom: 2px solid #F88821;
-}
-
-.forgot {
-    color: #000;
-    font-size: 12px;
-}
-
-.control-label {
-    font-size: 14px;
-    margin-bottom: 4px;
-    margin-top: 10px;
-}
-
-.icons {
-    margin-right: 20px;
-}
-
-.head-icon {
-    margin-left: 140px;
+.head-icon { 
+    margin-left: 140px; 
     margin-top: 15px;
-}
-
-.qwe {
-    margin: 8px 0 8px 0;
 }
 
 .form-control {
@@ -129,31 +146,124 @@ CSS
     border-radius: 10px;
 }
 
-.login_register {
-    margin-top: 20px;
+.form-control-lastchield { 
+    margin-bottom: 30px; 
 }
 
-.d5 {
-    margin-top: 10px;
-    margin-right: 80px;
+.searchbar {
+    font-size: 16px;
+    width: 325px;
+    height: 40px;
+    border: 1px solid #1A1919;
+    outline: none;
+    border-radius: 10px;
+    transition: all .1s;
+    transition-delay: .1s;
+    margin: 0 120px 0 112px;
+    font-weight: 100;
+    padding-left: 39px;
 }
 
-.blog-sidebar {
+.button {
+    position: absolute;
+    height: 20px;
+    left: 125px;
+    top: 20px;
 }
 
+.searchbar::-webkit-input-placeholder {
+    font-weight: bold;
+}
+
+/* Вход по логину */ 
+ 
+.modal-header { 
+    width: 420px; 
+    border-bottom: 0; 
+    position: relative; /* добавил позиционировани */ 
+}
+ 
+.close { 
+    display: block; 
+    position: absolute; 
+    cursor: pointer; 
+    padding: 10px; 
+    right: 5%; 
+    width: 30px; 
+    height: 30px; 
+    background-image: url("./img/icons/close-icon.svg"); 
+    background-size: cover; 
+}
+ 
+.forgot { 
+    color: #000; 
+    font-size: 10px; /* изменили размер шрифта на 12 */ 
+}
+
+/* Регистрация */ 
+ 
+.nav-login-link { 
+    text-transform: uppercase; 
+} 
+ 
+.icon-registration { 
+    position: absolute; 
+    left: 10%; 
+    display: inline-block; 
+    width: 24px; 
+    height: 24px; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+} 
+.icon-registration-google { 
+    background-image: url('./img/icons/google.png');
+} 
+.icon-registration-apple { 
+    width: 22px; 
+    height: 26px; 
+    background-image: url('./img/icons/apple.png');
+} 
+.icon-registration-vk { 
+    background-image: url('./img/icons/vk.png');
+} 
+.icon-registration-gos { 
+    width: 22px; 
+    height: 25px; 
+    background-image: url('./img/icons/gs.png');
+} 
+ 
+.control-label { 
+    font-size: 14px; 
+    margin-bottom: 4px; 
+    color: black; 
+} 
+ 
+.flex-form-registration { 
+    border: 1px solid #1A1919; 
+    border-radius: 10px; 
+    position: relative; 
+} 
+.flex-form-registration:not(:last-child) { 
+    margin-bottom: 14px; 
+}
 
 .nav-item {
     font-family: 'Montserrat';
     font-weight: 600;
 }
 
+.login_register {
+    margin-top: 8px;
+    padding: 9px 23px;
+    cursor: pointer;
+}
+
 .blog-logo {
-    font-size: 128px;
-    font-family: 'Nunito';
+    margin-top: 40px;
+    font-size: 99px;
+    font-family: 'Montserrat';
     font-weight: 800;
-    color: #1ABAA6;
-    width: 613px;
-    height: 175px;
+    color: white;
 }
 
 .description-area {
@@ -161,15 +271,22 @@ CSS
     font-family: 'Montserrat';
     font-weight: 400;
     line-height: 19.5px;
-    margin-left: auto;
 }
 
 .description {
     font-size: 16px;
+    color: white;
+    width: 480px;
 }
 
 .post-headline {
     font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.blog_area_second {
+    margin-top: 60px;
+    margin-bottom: 110px;
 }
 
 body {
@@ -199,20 +316,6 @@ h6 {
 p {
     color: #51545f;
     font-size: 16px;
-}
-
-#scrollUp {
-    bottom: 55px;
-    font-size: 14px;
-    right: 50%;
-    width: 30px;
-    background-color: #fc6c3f;
-    color: #fff;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    margin-right: -15px;
 }
 
 .yummy-table {
@@ -283,18 +386,21 @@ p {
 :: Top Header Area CSS
 -------------------- */
 
+.header_area {
+    border-bottom: 1px solid #eeeeee;
+}
+
 .top_header_area {
     width: 100%;
-    height: 70px;
-    border-bottom: 1px solid #ebebeb;
-    margin-bottom: 14px;
+    height: 65px;
+    margin-top: 10px;
+    margin-bottom: 4px;
 }
 
 .top_header_area .top_social_bar {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 40px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -344,9 +450,9 @@ p {
     font-family: 'Nunito';
     font-weight: 700;
     font-size: 40px;
-    padding: 30px 0 12px 0;
     display: inline-block;
     color: #232d37;
+    text-decoration: none;
 }
 
 .navbar.navbar-expand-lg {
@@ -354,10 +460,8 @@ p {
 }
 
 .navbar.navbar-expand-lg .navbar-nav .nav-link {
-    padding: 25px 30px;
-    color: #232d37;
-    text-transform: uppercase;
-    font-size: 14px;
+    padding-right: 30px;
+    color: black;
 }
 
 .navbar.navbar-expand-lg .navbar-nav .nav-link:hover,
@@ -366,103 +470,176 @@ p {
 }
 
 /* --------------------
-:: Instagram Area CSS 
+:: Slider Area CSS 
 -------------------- */
 
-.instagram_gallery_item {
+/* Собственно сам слайдер */
+.slider{
+    max-width: 64%;
     position: relative;
-    z-index: 1;
+    margin: auto;
+    height: 330px;
+    margin-bottom: 15px;
 }
 
-.instagram_gallery_item img {
-    -webkit-transition-duration: 500ms;
-    transition-duration: 500ms;
-    width: 100%;
+/* Картинка мастабируется по отношению к родительскому элементу */
+.slider .item img {
+    object-fit: cover;
+    margin-left: 53px;
+    width: 96%;
+    height: 330px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.473);
+    border-radius: 10px;
 }
 
-.instagram_gallery_item .hover_overlay {
-    background: rgba(252, 108, 63, 0.7);
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+/* Кнопки вперед и назад */
+.slider-dots .prev, .slider-dots .next {
+    padding: 13px;
+    margin: 0 20px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+/* Заголовок слайда */
+.slideText {
+    background-color: rgba(255, 255, 255, 0.377);
     position: absolute;
-    top: 0;
-    -webkit-transition-duration: 500ms;
-    transition-duration: 500ms;
-    width: 100%;
-    z-index: 5;
-}
-
-.instagram_gallery_item:hover .hover_overlay {
-    opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-}
-
-.instagram_gallery_item .follow-me a {
-    font-size: 16px;
     color: #fff;
-    font-weight: 400;
+    font-size: 35px;
+    /* Выравнивание текста по горизонтали и по вертикали*/
+    left: 821px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 802px;
+    height: 330px;
+    backdrop-filter: blur(100px);
+    border-radius: 0 10px 10px 0;
 }
 
-.instargram_area {
-    position: relative;
-    z-index: 1;
+/* Кружочки */
+.slider-dots {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 100px;
 }
 
-.instargram_area .owl-prev {
-    position: absolute;
-    width: 10%;
-    background-color: transparent;
-    height: 100%;
-    top: 0;
-    left: 0;
-    cursor: url(img/core-img/back.png), auto !important;
-    z-index: 9;
+.slider-dots_item{
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 10px;
+    border: 2px solid #B6B6B6;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
 }
 
-.instargram_area .owl-next {
-    position: absolute;
-    width: 10%;
-    background-color: transparent;
-    height: 100%;
-    top: 0;
-    right: 0;
-    cursor: url(img/core-img/next.png), auto !important;
+.slider-dots_item:hover {
+    background-color: #B6B6B6;
 }
 
+.slider-dots > .slider-dots_item.active {
+    background-color: #B6B6B6;
+}
+
+.slideText .slide_info img{
+    width: 50px;
+    height: 50px;
+    box-shadow: none;
+    margin: 13px 0 0 20px;
+}
+
+.slideText .slide_info a{
+    font-size: 20px;
+    font-family: 'Montserrat';
+}
+
+.slideText .slide_tour_name {
+    font-size: 40px;
+    margin: 10px 0 0 20px;
+}
+
+.slideText .slide_rating {
+    font-size: 18px;
+    margin: 5px 0 0 20px;
+}
+
+.slideText .slide_tour_info {
+    font-size: 16px;
+    margin: 10px 100px 0 20px;
+}
+
+.slideText .slide_tour_price {
+    font-size: 20px;
+    margin: 10px 0 10px 20px;
+}
+
+.slideText .slide_btn_buy_tour {
+    border-radius: 10px;
+    margin: -10px 0 10px 20px;
+    width: 130px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.slideText .slide_btn_details {
+    border-radius: 10px;
+    margin: -10px 10px 10px 20px;
+    width: 130px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.slideText .slide_btn_details:hover {
+    color: #000;
+}
 
 /* --------------------
 :: Footer Social Area
 -------------------- */
 
 .footer-social-area {
-    border-bottom: 1px solid #eeeeee;
-    padding: 50px 0;
+    padding: 20px 0;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between
 }
 
-.single-icon > a {
-    color: #51545f;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
+.footer_area {
+    border-top: 1px solid #eeeeee;
 }
 
-.single-icon > a:hover {
+.footer-privacy {
+    white-space: pre-line;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.footer-contacts {
+    color: #1ABAA6;
+    white-space: pre-line;
+    font-size: 14px;
+}
+
+.footer-contacts div {
+    color: black;
+}
+
+.footer-link > a {
+    color: #1ABAA6;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.footer-link > a:hover {
     color: #fc6c3f;
 }
 
-.single-icon > a > i {
+.footer-link > a > i {
     font-size: 16px;
     padding-right: 12px;
-}
-
-.footer-content {
-    padding: 50px 0 65px 0;
-    border-bottom: 1px solid #eeeeee;
 }
 
 .footer-logo-area .yummy-logo {
@@ -481,4 +658,35 @@ p {
     padding: 0 0 20px 0;
     display: inline-block;
     color: #232d37;
+}
+
+/* --------------------
+:: Breadcrumbs Area
+-------------------- */
+
+.breadcrumbs {
+    margin-left: 385px; 
+    padding: 0;
+    font-size: 14px;
+    color: #B6B6B6;
+}
+
+.breadcrumbs li {
+    display: inline-block;
+}
+
+.breadcrumbs li a {
+    text-decoration: none;
+    color: #a1a1a1;
+}
+
+.breadcrumbs li::before {
+    content: '>';
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #B6B6B6;
+}
+
+.breadcrumbs li:first-child::before {
+    content: ''; /* Убираем разделитель для первого пункта */
 }
