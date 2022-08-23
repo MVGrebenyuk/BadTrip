@@ -3,7 +3,6 @@ package ru.alexsolution.services;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.alexsolution.TripMapper;
 import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
 import ru.alexsolution.entity.User;
@@ -19,7 +18,6 @@ import java.util.UUID;
 public class TripService {
 
     private final TripRepository repository;
-    private final TripMapper tripMapper;
     private final UserService userService;
 
     public List<Trip> getAllTrips(){
@@ -31,7 +29,7 @@ public class TripService {
     }
 
     public void createTrip(Principal principal, TripDto createTripDto) {
-        Trip trip = tripMapper.toTrip(createTripDto);
+        Trip trip = toEntity(createTripDto);
         User user = userService.findByLogin(principal.getName())
                 .orElseThrow(() -> new RuntimeException("Cannot find author"));
         trip.setAuthor(user);
@@ -39,6 +37,36 @@ public class TripService {
     }
 
     public TripDto getTripByAuthor(UUID author){
-        return tripMapper.toCreateTripDto(repository.findByAuthor(author));
+        return toDto(repository.findByAuthor(author));
+    }
+
+    public TripDto toDto(Trip trip){
+        return TripDto.builder()
+                .id(UUID.randomUUID())
+                .author(trip.getAuthor().getId())
+                .country(trip.getCountry())
+                .duration(trip.getDuration())
+                .length(trip.getLength())
+                .level(trip.getLevel())
+                .price(trip.getPrice())
+                .region(trip.getRegion())
+                .shortTitle(trip.getShortTitle())
+                .title(trip.getTitle())
+                .build();
+    }
+
+    public Trip toEntity(TripDto trip){
+        return Trip.builder()
+                .id(UUID.randomUUID())
+                .author(userService.findByID(trip.getAuthor()))
+                .country(trip.getCountry())
+                .duration(trip.getDuration())
+                .length(trip.getLength())
+                .level(trip.getLevel())
+                .price(trip.getPrice())
+                .region(trip.getRegion())
+                .shortTitle(trip.getShortTitle())
+                .title(trip.getTitle())
+                .build();
     }
 }

@@ -32,6 +32,15 @@
         </sql>
     </changeSet>
 
+    <changeSet id="0.2.1" author="">
+        <sql>
+            insert into users (id, login, first_name, last_name, date_of_birth, city)
+            values ('3fc69278-37c3-4b4b-9186-df7e44fe1684', 'bob', 'Bob', 'Parker', '1990-01-01', 'Voronezh');
+            insert into passwords (id, password, user_id)
+            values ('55034373-8c24-4939-83f6-0a50ddfd9836', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '3fc69278-37c3-4b4b-9186-df7e44fe1684');
+        </sql>
+    </changeSet>
+
     <changeSet id="0.3" author="NBykov">
         <sql>
             CREATE TABLE user_details (
@@ -49,7 +58,7 @@
                  id uuid PRIMARY KEY,
                  title varchar,
                  short_title varchar,
-                 author uuid references users(id),
+                 author_id uuid references users(id),
                  region varchar(50),
                  country varchar(50),
                  city varchar (50),

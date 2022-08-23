@@ -1,5 +1,7 @@
 package ru.alexsolution.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +17,8 @@ import java.util.UUID;
 @Table
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity(name = "trip")
 public class Trip {
 

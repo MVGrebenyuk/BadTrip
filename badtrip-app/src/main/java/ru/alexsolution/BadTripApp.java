@@ -8,7 +8,6 @@ public class BadTripApp
 {
     public static void main( String[] args )
     {
-
         SpringApplication.run(BadTripApp.class, args);
     }
 }

@@ -24,9 +24,9 @@ public class TripController {
         return service.getAllTrips();
     }
 
-    @GetMapping
-    private TripDto findByAuthor(UUID author){
-        return service.getTripByAuthor(author);
+    @GetMapping("/author/{id}")
+    private TripDto findByAuthor(UUID id){
+        return service.getTripByAuthor(id);
     }
 
     @GetMapping("/{id}")

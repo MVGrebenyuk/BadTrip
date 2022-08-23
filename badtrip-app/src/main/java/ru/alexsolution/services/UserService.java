@@ -16,7 +16,6 @@ import ru.alexsolution.dto.RegistrationDto;
 import ru.alexsolution.entity.Password;
 import ru.alexsolution.entity.Role;
 import ru.alexsolution.entity.User;
-import ru.alexsolution.repositories.RoleRepository;
 import ru.alexsolution.repositories.UserRepository;
 
 import java.io.IOException;
@@ -35,7 +34,6 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final RoleRepository roleRepository;
     private final UserConverter userConverter;
 
     public Optional<User> findByLogin(String username) {
@@ -76,5 +74,9 @@ public class UserService implements UserDetailsService {
             userDetails.setAvatar(path + multipartFile.getName());
             log.info("Avatar changed");
         }
+    }
+
+    public User findByID(UUID id){
+        return userRepository.findById(id).orElseThrow();
     }
 }
