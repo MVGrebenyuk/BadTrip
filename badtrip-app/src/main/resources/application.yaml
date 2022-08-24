@@ -3,6 +3,13 @@ server:
   servlet:
     context-path: /wannago
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 526207653680-ur5damesp4j96hafkfjcja7tsm32drds.apps.googleusercontent.com
+            client-secret: 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
   h2:
     console:
       path: /h2
