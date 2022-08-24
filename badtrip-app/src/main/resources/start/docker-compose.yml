@@ -1,0 +1,9 @@
+version: '3.1'
+
+services:
+  jrtb:
+    build:
+      context: .
+    ports:
+    - '8189:8189'
+    restart: always
