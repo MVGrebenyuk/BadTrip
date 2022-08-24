@@ -1,5 +1,6 @@
 package ru.alexsolution.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "AVATAR API", description = "Контроллер аватаров пользователей")
 public class AvatarController {
 
     private final UserService userService;

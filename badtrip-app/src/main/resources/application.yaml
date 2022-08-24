@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /wannago
 spring:
+  application:
+    name: WannaGo
   security:
     oauth2:
       client:
@@ -27,3 +29,9 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
+openapi:
+  security:
+    scheme:
+      name: default
+  version: 1

@@ -1,5 +1,7 @@
 package ru.alexsolution.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,14 @@ import ru.alexsolution.utils.JwtTokenUtil;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "AUTH API", description = "Контроллер для аутентификации")
 public class AuthController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/auth")
+    @Operation(summary = "Получить JWT token")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
