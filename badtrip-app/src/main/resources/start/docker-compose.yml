@@ -4,4 +4,6 @@ services:
   jrtb:
     build:
       context: .
+    ports:
+    - '8189:8189'
     restart: always
