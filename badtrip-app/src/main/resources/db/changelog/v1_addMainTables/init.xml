@@ -11,8 +11,8 @@
             (
                 id            UUID PRIMARY KEY,
                 login         varchar(255) not null,
-                first_name    varchar      not null,
-                last_name     varchar      not null,
+                first_name    varchar,
+                last_name     varchar,
                 date_of_birth DATE,
                 city          varchar,
                 created_at timestamp default current_timestamp,
@@ -66,9 +66,31 @@
                  price numeric,
                  length numeric,
                  duration time,
+                 image varchar,
                  creation_date timestamp,
                  updated_date timestamp
             );
+
+            INSERT INTO TRIP(id,title,short_title,author_id,region,country,
+                             city,level,price,length,duration, image)
+                             VALUES ('63861814-94ec-4420-863f-6a4bd98722de', 'Холмистый Воронеж',
+                                     'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?',
+                                     '3fc69278-37c3-4b4b-9186-df7e44fe1684', 'Europe', 'Russia',
+                                     'Voronezh', '1', '200', '300', '12:00:00', null);
+
+            INSERT INTO TRIP(id,title,short_title,author_id,region,country,
+                             city,level,price,length,duration,image)
+            VALUES ('eac8a838-570e-4ba8-b54e-84a6d84b04c3', 'Резной Петербург',
+                    'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?',
+                    '3fc69278-37c3-4b4b-9186-df7e44fe1684', 'Europe', 'Russia',
+                    'Saint-P', '1', '200', '300', '12:00:00', null);
+
+            INSERT INTO TRIP(id,title,short_title,author_id,region,country,
+                             city,level,price,length,duration, image)
+            VALUES ('f0d24ae1-d047-46c3-85e5-391e6bf996a1', 'Жаркий Батуми',
+                    'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?',
+                    '3fc69278-37c3-4b4b-9186-df7e44fe1684', 'Europe', 'Georgia',
+                    'Batumi', '1', '200', '300', '12:00:00', null);
         </sql>
     </changeSet>
 
