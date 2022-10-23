@@ -3,6 +3,7 @@ package ru.alexsolution.services;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
 import ru.alexsolution.entity.User;
@@ -19,6 +20,7 @@ public class TripService {
 
     private final TripRepository repository;
     private final UserService userService;
+    private final AwsService awsService;
 
     public List<Trip> getAllTrips(){
        return repository.findAll();
@@ -29,10 +31,9 @@ public class TripService {
     }
 
     public void createTrip(Principal principal, TripDto createTripDto) {
-        Trip trip = toEntity(createTripDto);
         User user = userService.findByLogin(principal.getName())
                 .orElseThrow(() -> new RuntimeException("Cannot find author"));
-        trip.setAuthor(user);
+        Trip trip = toEntity(createTripDto, user);
         repository.save(trip);
     }
 
@@ -48,6 +49,7 @@ public class TripService {
                 .duration(trip.getDuration())
                 .length(trip.getLength())
                 .level(trip.getLevel())
+                .description(trip.getDescription())
                 .price(trip.getPrice())
                 .region(trip.getRegion())
                 .shortTitle(trip.getShortTitle())
@@ -55,18 +57,24 @@ public class TripService {
                 .build();
     }
 
-    public Trip toEntity(TripDto trip){
+    public Trip toEntity(TripDto trip, User user){
         return Trip.builder()
                 .id(UUID.randomUUID())
-                .author(userService.findByID(trip.getAuthor()))
+                .author(user)
                 .country(trip.getCountry())
                 .duration(trip.getDuration())
                 .length(trip.getLength())
                 .level(trip.getLevel())
                 .price(trip.getPrice())
                 .region(trip.getRegion())
+                .description(trip.getDescription())
+                .image(trip.getImage())
                 .shortTitle(trip.getShortTitle())
                 .title(trip.getTitle())
                 .build();
+    }
+
+    public String saveGeneralImage(MultipartFile file) {
+        return awsService.uploadImage(file);
     }
 }

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
 import ru.alexsolution.services.TripService;
@@ -40,12 +41,15 @@ public class TripController {
         return service.findTripById(id);
     }
 
-    @PostMapping
-    @Operation(summary = "Создать тур")
-    private void createTrip(Principal principal, TripDto createTripDto){
-        service.createTrip(principal, createTripDto);
+    @PostMapping("/image")
+    @Operation(summary = "Создать изображение")
+    private String saveTripImage(Principal principal, @RequestBody MultipartFile file){
+        return service.saveGeneralImage(file);
     }
 
-
-
+    @PostMapping
+    @Operation(summary = "Создать тур")
+    private void createTrip(Principal principal, @RequestBody TripDto trip){
+        service.createTrip(principal, trip);
+    }
 }

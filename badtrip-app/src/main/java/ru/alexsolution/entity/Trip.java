@@ -51,6 +51,10 @@ public class Trip {
 
     private LocalTime duration;
 
+    private String image;
+
+    private String description;
+
     @CreationTimestamp
     private LocalDateTime creationDate;
 

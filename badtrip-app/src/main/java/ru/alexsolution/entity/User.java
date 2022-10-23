@@ -32,6 +32,8 @@ public class User {
 
     private String lastName;
 
+    private String avatar;
+
     private LocalDate dateOfBirth;
 
     private String city;

@@ -35,3 +35,8 @@ openapi:
     scheme:
       name: default
   version: 1
+
+aws:
+  accessKeyId: pZHFL6TARutSLZ1E7f2Tgn
+  secret: 8PdV8sEkmeK13DRSM8g3WL5i7wv8Qg4hVMdSvrupSxrP
+  bucket: wannago

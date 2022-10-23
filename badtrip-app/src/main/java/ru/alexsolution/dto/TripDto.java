@@ -2,7 +2,9 @@ package ru.alexsolution.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -19,6 +21,8 @@ public class TripDto {
 
     private UUID author;
 
+    private String description;
+
     private String region;
 
     private String country;
@@ -31,5 +35,6 @@ public class TripDto {
 
     private LocalTime duration;
 
+    private String image;
 
 }

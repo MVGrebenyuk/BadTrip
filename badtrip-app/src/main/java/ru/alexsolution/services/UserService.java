@@ -77,6 +77,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByID(UUID id){
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Пользователь не найден"));
     }
 }
