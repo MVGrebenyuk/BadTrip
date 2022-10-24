@@ -1,7 +1,6 @@
 package ru.alexsolution.converters;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.alexsolution.dto.RegistrationDto;
 import ru.alexsolution.entity.User;
@@ -19,13 +18,19 @@ public class UserConverter {
         User user = User.builder()
                 .id(UUID.randomUUID())
                 .login(registrationDto.getLogin())
-                .city(registrationDto.getCity())
-                .firstName(registrationDto.getFirstName())
-                .lastName(registrationDto.getLastName())
                 .roles(roleRepository.findAllByName("ROLE_USER"))
-                .dateOfBirth(registrationDto.getDateOfBirth())
+                .avatar("https://wannago.hb.bizmrg.com/1_W35QUSvGpcLuxPo3SRTH4w.png")
                 .build();
+        return user;
+    }
 
+    public User fillUser (User user, RegistrationDto registrationDto) {
+                user.setCity(registrationDto.getCity() != null ? registrationDto.getCity() : user.getCity());
+                user.setFirstName(registrationDto.getFirstName() != null ? registrationDto.getFirstName() : user.getFirstName());
+                user.setLastName(registrationDto.getLastName() != null ? registrationDto.getLastName() : user.getLastName());
+                user.setDateOfBirth(registrationDto.getDateOfBirth() != null ? registrationDto.getDateOfBirth() : user.getDateOfBirth());
+                user.setAvatar(registrationDto.getAvatar());
+                user.setAbout(registrationDto.getAbout() != null ? registrationDto.getAbout() : user.getAbout());
         return user;
     }
 }

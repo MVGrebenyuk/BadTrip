@@ -2,7 +2,6 @@ package ru.alexsolution.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public class RegistrationDto {
 
     private String avatar;
 
-    private String aboutMe;
+    private String about;
 
 //    @NotEmpty(message = "Пароль не может быть пустым")
 //    @Min(value = 6, message = "Длина пароля не может быть меньше шести символов")
