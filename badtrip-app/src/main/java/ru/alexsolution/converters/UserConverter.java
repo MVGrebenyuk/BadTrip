@@ -29,7 +29,9 @@ public class UserConverter {
                 user.setFirstName(registrationDto.getFirstName() != null ? registrationDto.getFirstName() : user.getFirstName());
                 user.setLastName(registrationDto.getLastName() != null ? registrationDto.getLastName() : user.getLastName());
                 user.setDateOfBirth(registrationDto.getDateOfBirth() != null ? registrationDto.getDateOfBirth() : user.getDateOfBirth());
-                user.setAvatar(registrationDto.getAvatar());
+                if(registrationDto.getAvatar() != null) {
+                    user.setAvatar(registrationDto.getAvatar());
+                }
                 user.setAbout(registrationDto.getAbout() != null ? registrationDto.getAbout() : user.getAbout());
         return user;
     }
