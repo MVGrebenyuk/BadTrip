@@ -2,7 +2,6 @@ package ru.alexsolution.services;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +12,6 @@ import ru.alexsolution.entity.user.UserDetails;
 import ru.alexsolution.repositories.TripRepository;
 import ru.alexsolution.repositories.UserDetailsRepository;
 
-import java.lang.reflect.Array;
 import java.security.Principal;
 import java.util.*;
 
