@@ -2,7 +2,7 @@ package ru.alexsolution.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.alexsolution.entity.UserDetails;
+import ru.alexsolution.entity.user.UserDetails;
 
 import java.util.UUID;
 

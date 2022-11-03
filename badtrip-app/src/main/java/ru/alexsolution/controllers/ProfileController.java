@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.alexsolution.dto.RegistrationDto;
-import ru.alexsolution.entity.User;
+import ru.alexsolution.entity.user.User;
 import ru.alexsolution.services.UserService;
 
-import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController

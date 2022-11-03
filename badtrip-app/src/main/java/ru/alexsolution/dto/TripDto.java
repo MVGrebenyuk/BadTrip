@@ -33,7 +33,7 @@ public class TripDto {
 
     private BigDecimal length;
 
-    private LocalTime duration;
+    private Integer duration;
 
     private String image;
 

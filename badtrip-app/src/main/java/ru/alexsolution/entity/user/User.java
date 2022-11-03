@@ -1,4 +1,4 @@
-package ru.alexsolution.entity;
+package ru.alexsolution.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringExclude;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.alexsolution.entity.Password;
+import ru.alexsolution.entity.Role;
+import ru.alexsolution.entity.Trip;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -58,17 +62,10 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToMany
-    @JoinTable(name = "favorites_to_user",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "trip_id"))
-    private Collection<Trip> favorites;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserDetails userDetails;
 
     private String about;
-
-    @ManyToMany
-    @JoinTable(name = "purchased_to_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "trip_id"))
-    private Collection<Trip> purchased;
 }

@@ -6,12 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.alexsolution.entity.user.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.UUID;
 
 @Table
@@ -39,17 +39,13 @@ public class Trip {
 
     private String city;
 
-    //private Photos photos;
-
-    //private TripMap tripMap;
-
     private Integer level;
 
     private BigDecimal price;
 
     private BigDecimal length;
 
-    private LocalTime duration;
+    private Integer duration;
 
     private String image;
 

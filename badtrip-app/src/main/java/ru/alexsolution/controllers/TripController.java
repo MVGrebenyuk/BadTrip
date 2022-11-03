@@ -29,9 +29,9 @@ public class TripController {
         return service.getAllTrips();
     }
 
-    @GetMapping("/author/{id}")
-    @Operation(summary = "Получить тур по if автора")
-    private TripDto findByAuthor(UUID id){
+    @GetMapping("/{id}/author")
+    @Operation(summary = "Получить туры по id автора")
+    private List<Trip> findByAuthor(@PathVariable UUID id){
         return service.getTripByAuthor(id);
     }
 
@@ -45,6 +45,30 @@ public class TripController {
     @Operation(summary = "Создать изображение")
     private String saveTripImage(Principal principal, @RequestBody MultipartFile file){
         return service.saveGeneralImage(file);
+    }
+
+    @GetMapping("/favorites")
+    @Operation(summary = "Получить список избранных туров")
+    private List<Trip> getFavoritesForUser(Principal principal){
+        return service.findFavoritesTours(principal.getName());
+    }
+
+    @GetMapping("/purchased")
+    @Operation(summary = "Получить список купленных туров")
+    private List<Trip> getPurchasedForUser(Principal principal){
+        return service.findPurchasedTours(principal.getName());
+    }
+
+    @PostMapping("/favorites/{tourId}")
+    @Operation(summary = "Добавить тур в избранные")
+    private void addToFavorite(Principal principal, @PathVariable UUID tourId){
+        service.addToFavorite(principal.getName(), tourId);
+    }
+
+    @PostMapping("/purchased/{tourId}")
+    @Operation(summary = "Добавить тур в кумленные")
+    private void addToPurchased(Principal principal, @PathVariable UUID tourId){
+        service.addToPurchased(principal.getName(), tourId);
     }
 
     @PostMapping

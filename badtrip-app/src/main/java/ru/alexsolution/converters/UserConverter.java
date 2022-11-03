@@ -3,7 +3,7 @@ package ru.alexsolution.converters;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.alexsolution.dto.RegistrationDto;
-import ru.alexsolution.entity.User;
+import ru.alexsolution.entity.user.User;
 import ru.alexsolution.repositories.RoleRepository;
 
 import java.util.UUID;

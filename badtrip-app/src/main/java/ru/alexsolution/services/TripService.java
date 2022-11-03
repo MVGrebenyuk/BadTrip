@@ -2,16 +2,20 @@ package ru.alexsolution.services;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
-import ru.alexsolution.entity.User;
+import ru.alexsolution.entity.user.User;
+import ru.alexsolution.entity.user.UserDetails;
 import ru.alexsolution.repositories.TripRepository;
+import ru.alexsolution.repositories.UserDetailsRepository;
 
+import java.lang.reflect.Array;
 import java.security.Principal;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Data
@@ -21,6 +25,7 @@ public class TripService {
     private final TripRepository repository;
     private final UserService userService;
     private final AwsService awsService;
+    private final UserDetailsRepository userDetailsRepository;
 
     public List<Trip> getAllTrips(){
        return repository.findAll();
@@ -37,8 +42,8 @@ public class TripService {
         repository.save(trip);
     }
 
-    public TripDto getTripByAuthor(UUID author){
-        return toDto(repository.findByAuthor(author));
+    public List<Trip> getTripByAuthor(UUID author){
+        return repository.findByAuthor(author);
     }
 
     public TripDto toDto(Trip trip){
@@ -76,5 +81,59 @@ public class TripService {
 
     public String saveGeneralImage(MultipartFile file) {
         return awsService.uploadImage(file);
+    }
+
+    public List<Trip> findFavoritesTours(String userName) {
+       return (List<Trip>) userService.findByLogin(userName).get().getUserDetails().getFavorites();
+    }
+
+    public List<Trip> findPurchasedTours(String userName) {
+        return (List<Trip>) userService.findByLogin(userName).get().getUserDetails().getPurchased();
+    }
+
+    @Transactional
+    public void addToFavorite(String name, UUID tourId) {
+        User user = userService.findByLogin(name).orElseThrow();
+        UserDetails userDetails = user.getUserDetails();
+       if(userDetails == null){
+           List<Trip> tripList = new ArrayList<>(List.of(repository.findById(tourId).orElseThrow()));
+
+           userDetails = new UserDetails();
+           userDetails.setUser(userService.findByLogin(name).orElseThrow());
+           userDetails.setFavorites(tripList);
+           userDetailsRepository.save(userDetails);
+
+           user.setUserDetails(userDetails);
+       } else if(Optional.ofNullable(userDetails.getFavorites()).isPresent()){
+           userDetails.getFavorites().add(repository.findById(tourId).orElseThrow());
+           user.setUserDetails(userDetails);
+       } else {
+           List<Trip> tripList = new ArrayList<>(List.of(repository.findById(tourId).orElseThrow()));
+           userDetails.setFavorites(tripList);
+           user.setUserDetails(userDetails);
+       }
+    }
+
+    @Transactional
+    public void addToPurchased(String name, UUID tourId) {
+        User user = userService.findByLogin(name).orElseThrow();
+        UserDetails userDetails = user.getUserDetails();
+        if(userDetails == null){
+            List<Trip> tripList = new ArrayList<>(List.of(repository.findById(tourId).orElseThrow()));
+
+            userDetails = new UserDetails();
+            userDetails.setUser(userService.findByLogin(name).orElseThrow());
+            userDetails.setPurchased(tripList);
+            userDetailsRepository.save(userDetails);
+
+            user.setUserDetails(userDetails);
+        } else if(Optional.ofNullable(userDetails.getPurchased()).isPresent()){
+            userDetails.getPurchased().add(repository.findById(tourId).orElseThrow());
+            user.setUserDetails(userDetails);
+        } else {
+            List<Trip> tripList = new ArrayList<>(List.of(repository.findById(tourId).orElseThrow()));
+            userDetails.setPurchased(tripList);
+            user.setUserDetails(userDetails);
+        }
     }
 }

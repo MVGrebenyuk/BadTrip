@@ -14,7 +14,7 @@ import ru.alexsolution.converters.UserConverter;
 import ru.alexsolution.dto.RegistrationDto;
 import ru.alexsolution.entity.Password;
 import ru.alexsolution.entity.Role;
-import ru.alexsolution.entity.User;
+import ru.alexsolution.entity.user.User;
 import ru.alexsolution.repositories.UserRepository;
 
 import java.security.Principal;
