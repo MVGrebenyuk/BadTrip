@@ -25,8 +25,8 @@ public class TripController {
 
     @GetMapping
     @Operation(summary = "Получить все туры")
-    private List<Trip> getAllTrips(){
-        return service.getAllTrips();
+    private List<TripDto> getAllTrips(Principal principal){
+        return service.getAllTrips(principal);
     }
 
     @GetMapping("/{id}/author")
@@ -37,8 +37,8 @@ public class TripController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Получить тур по id")
-    private Trip getTripById(@PathVariable UUID id){
-        return service.findTripById(id);
+    private TripDto getTripById(Principal principal, @PathVariable UUID id){
+        return service.findTripById(principal.getName(), id);
     }
 
     @PostMapping("/image")
@@ -69,6 +69,12 @@ public class TripController {
     @Operation(summary = "Добавить тур в кумленные")
     private void addToPurchased(Principal principal, @PathVariable UUID tourId){
         service.addToPurchased(principal.getName(), tourId);
+    }
+
+    @GetMapping("/purchased/{tourId}/tour")
+    @Operation(summary = "Получить купленный тур")
+    private TripDto getPurchasedForUser(Principal principal, @PathVariable UUID tourId){
+        return service.findPurchasedTour(principal.getName(), tourId);
     }
 
     @PostMapping

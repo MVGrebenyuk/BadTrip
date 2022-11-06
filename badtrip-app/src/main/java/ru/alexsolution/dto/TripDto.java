@@ -1,8 +1,11 @@
 package ru.alexsolution.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import ru.alexsolution.entity.user.User;
 
 import javax.servlet.annotation.MultipartConfig;
 import java.math.BigDecimal;
@@ -11,6 +14,8 @@ import java.util.UUID;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TripDto {
 
     private UUID id;
@@ -19,7 +24,7 @@ public class TripDto {
 
     private String shortTitle;
 
-    private UUID author;
+    private User author;
 
     private String description;
 
@@ -36,5 +41,9 @@ public class TripDto {
     private Integer duration;
 
     private String image;
+
+    private Boolean isPurchared;
+
+    private Boolean isFavorite;
 
 }

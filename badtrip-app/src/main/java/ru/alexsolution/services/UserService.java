@@ -50,6 +50,10 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public User saveNewUser(RegistrationDto registrationDto) {
+        if(userRepository.existsByLogin(registrationDto.getLogin())){
+            throw new RuntimeException("Cannot registration. User is existed");
+        }
+
         User user = userConverter.DtoToEntity(registrationDto);
         userRepository.save(user);
         user.setPassword(new Password(UUID.randomUUID(), bCryptPasswordEncoder.encode(registrationDto.getPassword()), user));

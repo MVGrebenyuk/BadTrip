@@ -14,6 +14,7 @@ import ru.alexsolution.repositories.UserDetailsRepository;
 
 import java.security.Principal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -25,12 +26,39 @@ public class TripService {
     private final AwsService awsService;
     private final UserDetailsRepository userDetailsRepository;
 
-    public List<Trip> getAllTrips(){
-       return repository.findAll();
+    public List<TripDto> getAllTrips(Principal principal){
+        if(principal == null) {
+            return repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
+        } else {
+            return getFilteredTrips(principal);
+        }
     }
 
-    public Trip findTripById(UUID id){
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find trip"));
+    public List<TripDto> getFilteredTrips(Principal principal){
+        List<TripDto> returningList = new ArrayList<>();
+
+        returningList.addAll(findFavoritesTours(principal.getName()).stream().map(this::toDto)
+                .peek(t -> t.setIsFavorite(true))
+                .collect(Collectors.toList()));
+        returningList.addAll(findPurchasedTours(principal.getName()).stream().map(this::toDto)
+                .peek(t -> t.setIsPurchared(true))
+                .collect(Collectors.toList()));
+
+        Set<UUID> uidsSet = returningList.stream().map(TripDto::getId).collect(Collectors.toSet());
+        if(uidsSet.isEmpty()){
+            return repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
+        } else {
+            returningList.addAll(repository.findTripByIdNotIn(uidsSet).stream().map(this::toDto).collect(Collectors.toList()));
+        }
+        return returningList;
+    }
+
+    public TripDto findTripById(String name, UUID id){
+        TripDto tripDto = findPurchasedTour(name, id);
+        if(tripDto == null || tripDto.getIsPurchared() == null || tripDto.getIsPurchared() == false){
+            return toDto(repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find trip")));
+        }
+        return tripDto;
     }
 
     public void createTrip(Principal principal, TripDto createTripDto) {
@@ -46,10 +74,11 @@ public class TripService {
 
     public TripDto toDto(Trip trip){
         return TripDto.builder()
-                .id(UUID.randomUUID())
-                .author(trip.getAuthor().getId())
+                .id(trip.getId())
+                .author(trip.getAuthor())
                 .country(trip.getCountry())
                 .duration(trip.getDuration())
+                .image(trip.getImage())
                 .length(trip.getLength())
                 .level(trip.getLevel())
                 .description(trip.getDescription())
@@ -82,11 +111,15 @@ public class TripService {
     }
 
     public List<Trip> findFavoritesTours(String userName) {
-       return (List<Trip>) userService.findByLogin(userName).get().getUserDetails().getFavorites();
+        User user  = userService.findByLogin(userName).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getUserDetails() == null ? new ArrayList<>() : user.getUserDetails().getFavorites() == null
+                ? new ArrayList<>() : (List<Trip>) user.getUserDetails().getFavorites();
     }
 
     public List<Trip> findPurchasedTours(String userName) {
-        return (List<Trip>) userService.findByLogin(userName).get().getUserDetails().getPurchased();
+        User user  = userService.findByLogin(userName).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getUserDetails() == null ? new ArrayList<>() : user.getUserDetails().getPurchased() == null
+                ? new ArrayList<>() : (List<Trip>) user.getUserDetails().getPurchased();
     }
 
     @Transactional
@@ -133,5 +166,18 @@ public class TripService {
             userDetails.setPurchased(tripList);
             user.setUserDetails(userDetails);
         }
+    }
+
+    @Transactional
+    public TripDto findPurchasedTour(String name, UUID tourId) {
+        if(name == null){
+            return null;
+        }
+
+        User user  = userService.findByLogin(name).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getUserDetails() == null ? new TripDto() : user.getUserDetails().getPurchased() == null
+                ? new TripDto() : user.getUserDetails().getPurchased().stream()
+                .map(this::toDto)
+                .filter(t -> t.getId().equals(tourId)).peek(t -> t.setIsPurchared(true)).findAny().orElse(new TripDto());
     }
 }

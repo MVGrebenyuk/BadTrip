@@ -2,6 +2,7 @@ package ru.alexsolution.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.alexsolution.entity.user.User;
@@ -19,6 +20,11 @@ public class UserController {
     @GetMapping
     public User getUser(Principal principal){
         return service.findByLogin(principal.getName()).orElseThrow();
+    }
+
+    @GetMapping("/{userId}")
+    public User getUser(@PathVariable String userId){
+        return service.findByLogin(userId).orElseThrow();
     }
 
 }
