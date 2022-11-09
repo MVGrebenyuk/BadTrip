@@ -9,6 +9,7 @@ import ru.alexsolution.entity.user.User;
 import ru.alexsolution.services.UserService;
 
 import java.security.Principal;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -24,7 +25,6 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public User getUser(@PathVariable String userId){
-        return service.findByLogin(userId).orElseThrow();
+        return service.findByID(UUID.fromString(userId));
     }
-
 }

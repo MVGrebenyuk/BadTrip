@@ -141,6 +141,8 @@ Praesent venenatis, metus a dapibus ornare, tortor tellus dapibus ex, sit amet m
             insert into roles (name)
             values ('ROLE_USER'),
                    ('ROLE_ADMIN');
+
+            insert into users_roles(user_id, role_id) VALUES ('3fc69278-37c3-4b4b-9186-df7e44fe1684', '2');
         </sql>
     </changeSet>
 

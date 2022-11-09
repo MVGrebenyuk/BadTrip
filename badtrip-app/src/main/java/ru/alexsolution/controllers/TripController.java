@@ -4,8 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.alexsolution.dto.InputFilterDto;
 import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
 import ru.alexsolution.services.TripService;
@@ -23,10 +26,16 @@ public class TripController {
 
     private final TripService service;
 
-    @GetMapping
+    @PostMapping("/get")
     @Operation(summary = "Получить все туры")
-    private List<TripDto> getAllTrips(Principal principal){
-        return service.getAllTrips(principal);
+    private List<TripDto> getAllTrips(Principal principal, @RequestBody(required = false) InputFilterDto filter){
+
+        try {
+            log.info("FILTER: " + filter.toString());
+        } catch (Exception e){
+            System.out.println(e);
+        }
+            return service.getAllTrips(principal, filter);
     }
 
     @GetMapping("/{id}/author")
@@ -39,6 +48,13 @@ public class TripController {
     @Operation(summary = "Получить тур по id")
     private TripDto getTripById(Principal principal, @PathVariable UUID id){
         return service.findTripById(principal.getName(), id);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    @Operation(summary = "Получить тур по id")
+    @Secured("ROLE_ADMIN")
+    private void deleteTripById(Principal principal, @PathVariable UUID id){
+        service.deleteTripById(id);
     }
 
     @PostMapping("/image")

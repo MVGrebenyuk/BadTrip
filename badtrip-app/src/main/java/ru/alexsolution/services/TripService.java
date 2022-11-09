@@ -2,15 +2,20 @@ package ru.alexsolution.services;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
+import ru.alexsolution.dto.FilterDto;
+import ru.alexsolution.dto.InputFilterDto;
 import ru.alexsolution.dto.TripDto;
 import ru.alexsolution.entity.Trip;
 import ru.alexsolution.entity.user.User;
 import ru.alexsolution.entity.user.UserDetails;
 import ru.alexsolution.repositories.TripRepository;
 import ru.alexsolution.repositories.UserDetailsRepository;
+import ru.alexsolution.repositories.specifications.TripSpecification;
 
 import java.security.Principal;
 import java.util.*;
@@ -26,15 +31,22 @@ public class TripService {
     private final AwsService awsService;
     private final UserDetailsRepository userDetailsRepository;
 
-    public List<TripDto> getAllTrips(Principal principal){
+    public List<TripDto> getAllTrips(Principal principal, InputFilterDto filter){
+        Specification<Trip> specification = Specification.where(null);
+
+        if(!ObjectUtils.isEmpty(filter)){
+            specification = TripSpecification.fillSpecification(filter);
+        }
+
         if(principal == null) {
-            return repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
+            return repository.findAll(specification).stream().map(this::toDto).collect(Collectors.toList());
         } else {
-            return getFilteredTrips(principal);
+            return getFilteredTrips(principal, specification);
         }
     }
 
-    public List<TripDto> getFilteredTrips(Principal principal){
+
+    public List<TripDto> getFilteredTrips(Principal principal, Specification<Trip> specification){
         List<TripDto> returningList = new ArrayList<>();
 
         returningList.addAll(findFavoritesTours(principal.getName()).stream().map(this::toDto)
@@ -46,9 +58,10 @@ public class TripService {
 
         Set<UUID> uidsSet = returningList.stream().map(TripDto::getId).collect(Collectors.toSet());
         if(uidsSet.isEmpty()){
-            return repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
+            return repository.findAll(specification).stream().map(this::toDto).collect(Collectors.toList());
         } else {
             returningList.addAll(repository.findTripByIdNotIn(uidsSet).stream().map(this::toDto).collect(Collectors.toList()));
+            //ToDo добавить обработку спецификации
         }
         return returningList;
     }
@@ -179,5 +192,22 @@ public class TripService {
                 ? new TripDto() : user.getUserDetails().getPurchased().stream()
                 .map(this::toDto)
                 .filter(t -> t.getId().equals(tourId)).peek(t -> t.setIsPurchared(true)).findAny().orElse(new TripDto());
+    }
+
+    public FilterDto getAllFilters() {
+        return FilterDto.builder()
+                .country(repository.findAllCountry())
+                .region(repository.findAllRegions())
+                .durationMin(repository.findMinDuration())
+                .durationMax(repository.findMaxDuration())
+                .lengthMin(repository.findMinlength())
+                .lengthMax(repository.findMaxlength())
+                .priceMin(repository.findMinPrice())
+                .priceMax(repository.findMaxPrice())
+                .build();
+    }
+
+    public void deleteTripById(UUID id) {
+       repository.deleteById(id);
     }
 }
