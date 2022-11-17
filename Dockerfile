@@ -1,4 +1,3 @@
-FROM eclipse-temurin:17-jdk-jammy
-WORKDIR .
-COPY badtrip-app-1.0-SNAPSHOT.jar .
-CMD ["-java", "-jar", "badtrip-app-1.0-SNAPSHOT.jar"]
+FROM adoptopenjdk/openjdk11:alpine-jre
+ADD badtrip-app/target/*.jar /badtrip-app-1-SNAPSHOT.jar
+ENTRYPOINT exec java $JAVA_OPTS -jar /badtrip-app-1-SNAPSHOT.jar
