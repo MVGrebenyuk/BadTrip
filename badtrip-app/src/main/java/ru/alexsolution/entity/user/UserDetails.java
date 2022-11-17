@@ -2,6 +2,7 @@ package ru.alexsolution.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.alexsolution.entity.Trip;
 
@@ -39,5 +40,6 @@ public class UserDetails {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @EqualsAndHashCode.Exclude
     private User user;
 }

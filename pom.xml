@@ -6,7 +6,7 @@
 	<groupId>ru.alexsolution</groupId>
 	<artifactId>badtrip</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1-SNAPSHOT</version>
 	<name>badtrip</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

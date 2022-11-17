@@ -1,9 +1,6 @@
 package ru.alexsolution.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.alexsolution.entity.user.User;
 
@@ -42,8 +39,10 @@ public class TripDto {
 
     private String image;
 
+    @EqualsAndHashCode.Exclude
     private Boolean isPurchared;
 
+    @EqualsAndHashCode.Exclude
     private Boolean isFavorite;
 
 }

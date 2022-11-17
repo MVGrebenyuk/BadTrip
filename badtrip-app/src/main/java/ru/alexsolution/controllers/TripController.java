@@ -15,6 +15,7 @@ import ru.alexsolution.services.TripService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -28,13 +29,7 @@ public class TripController {
 
     @PostMapping("/get")
     @Operation(summary = "Получить все туры")
-    private List<TripDto> getAllTrips(Principal principal, @RequestBody(required = false) InputFilterDto filter){
-
-        try {
-            log.info("FILTER: " + filter.toString());
-        } catch (Exception e){
-            System.out.println(e);
-        }
+    private Set<TripDto> getAllTrips(Principal principal, @RequestBody(required = false) InputFilterDto filter){
             return service.getAllTrips(principal, filter);
     }
 
@@ -65,7 +60,7 @@ public class TripController {
 
     @GetMapping("/favorites")
     @Operation(summary = "Получить список избранных туров")
-    private List<Trip> getFavoritesForUser(Principal principal){
+    private Set<TripDto> getFavoritesForUser(Principal principal){
         return service.findFavoritesTours(principal.getName());
     }
 
@@ -79,6 +74,12 @@ public class TripController {
     @Operation(summary = "Добавить тур в избранные")
     private void addToFavorite(Principal principal, @PathVariable UUID tourId){
         service.addToFavorite(principal.getName(), tourId);
+    }
+
+    @PostMapping("/favorites/{tourId}/remove")
+    @Operation(summary = "Удалить тур из избранных")
+    private void delFromFavorite(Principal principal, @PathVariable UUID tourId){
+        service.delFromFavorites(principal.getName(), tourId);
     }
 
     @PostMapping("/purchased/{tourId}")

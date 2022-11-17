@@ -31,7 +31,7 @@ public class TripService {
     private final AwsService awsService;
     private final UserDetailsRepository userDetailsRepository;
 
-    public List<TripDto> getAllTrips(Principal principal, InputFilterDto filter){
+    public Set<TripDto> getAllTrips(Principal principal, InputFilterDto filter){
         Specification<Trip> specification = Specification.where(null);
 
         if(!ObjectUtils.isEmpty(filter)){
@@ -39,37 +39,53 @@ public class TripService {
         }
 
         if(principal == null) {
-            return repository.findAll(specification).stream().map(this::toDto).collect(Collectors.toList());
+            return repository.findAll(specification).stream().map(this::toDto).collect(Collectors.toSet());
         } else {
             return getFilteredTrips(principal, specification);
         }
     }
 
 
-    public List<TripDto> getFilteredTrips(Principal principal, Specification<Trip> specification){
-        List<TripDto> returningList = new ArrayList<>();
+    public Set<TripDto> getFilteredTrips(Principal principal, Specification<Trip> specification){
+        Set<TripDto> returningList = new HashSet<>();
 
-        returningList.addAll(findFavoritesTours(principal.getName()).stream().map(this::toDto)
+        returningList.addAll(findFavoritesTours(principal.getName()).stream()
                 .peek(t -> t.setIsFavorite(true))
                 .collect(Collectors.toList()));
         returningList.addAll(findPurchasedTours(principal.getName()).stream().map(this::toDto)
                 .peek(t -> t.setIsPurchared(true))
                 .collect(Collectors.toList()));
 
-        Set<UUID> uidsSet = returningList.stream().map(TripDto::getId).collect(Collectors.toSet());
-        if(uidsSet.isEmpty()){
-            return repository.findAll(specification).stream().map(this::toDto).collect(Collectors.toList());
-        } else {
-            returningList.addAll(repository.findTripByIdNotIn(uidsSet).stream().map(this::toDto).collect(Collectors.toList()));
-            //ToDo добавить обработку спецификации
-        }
-        return returningList;
+        Set<TripDto> secRetList = repository.findAll(specification).stream().map(this::toDto).collect(Collectors.toSet());
+        secRetList.forEach( s -> {
+            returningList.forEach(r -> {
+                if(s.equals(r)){
+                    s.setIsPurchared(r.getIsPurchared());
+                    s.setIsFavorite(r.getIsFavorite());
+                }
+            });
+        });
+        return secRetList;
     }
 
     public TripDto findTripById(String name, UUID id){
-        TripDto tripDto = findPurchasedTour(name, id);
-        if(tripDto == null || tripDto.getIsPurchared() == null || tripDto.getIsPurchared() == false){
-            return toDto(repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find trip")));
+        TripDto tripDto;
+        if(name != null) {
+            tripDto = findPurchasedTour(name, id);
+            if (tripDto == null || tripDto.getIsPurchared() == null) {
+                return toDto(repository.findById(id).orElseThrow(() -> new RuntimeException("Cannot find trip")));
+            }
+
+            TripDto favoriteDto = findFavoritesTours(name).stream().filter(t -> t.getId().equals(id))
+                    .peek(t -> t.setIsFavorite(true)).findAny().orElse(null);
+
+            if (favoriteDto != null) {
+                tripDto.setIsFavorite(true);
+            } else {
+                return tripDto;
+            }
+        } else {
+           tripDto = toDto(repository.findById(id).orElseThrow());
         }
         return tripDto;
     }
@@ -123,10 +139,19 @@ public class TripService {
         return awsService.uploadImage(file);
     }
 
-    public List<Trip> findFavoritesTours(String userName) {
+    public Set<TripDto> findFavoritesTours(String userName) {
         User user  = userService.findByLogin(userName).orElseThrow(() -> new RuntimeException("User not found"));
-        return user.getUserDetails() == null ? new ArrayList<>() : user.getUserDetails().getFavorites() == null
-                ? new ArrayList<>() : (List<Trip>) user.getUserDetails().getFavorites();
+
+        Set<TripDto> returningList = new HashSet<>();
+        returningList.addAll(findPurchasedTours(userName).stream().map(this::toDto)
+                .peek(t -> t.setIsPurchared(true))
+                .collect(Collectors.toList()));
+        if(user.getUserDetails() == null || user.getUserDetails().getFavorites() == null){
+            return new HashSet<>();
+        }
+        returningList.addAll(user.getUserDetails().getFavorites().stream()
+                .map(this::toDto).peek(t -> t.setIsFavorite(true)).collect(Collectors.toList()));
+        return returningList;
     }
 
     public List<Trip> findPurchasedTours(String userName) {
@@ -207,7 +232,14 @@ public class TripService {
                 .build();
     }
 
+    @Transactional
     public void deleteTripById(UUID id) {
        repository.deleteById(id);
+    }
+
+    @Transactional
+    public void delFromFavorites(String name, UUID tourId) {
+        userService.findByLogin(name).orElseThrow().getUserDetails()
+                .getFavorites().removeIf(d -> d.getId().equals(tourId));
     }
 }

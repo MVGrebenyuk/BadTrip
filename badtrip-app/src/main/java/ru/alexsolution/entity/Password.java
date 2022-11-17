@@ -3,6 +3,7 @@ package ru.alexsolution.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.alexsolution.entity.user.User;
 
@@ -24,5 +25,6 @@ public class Password {
     @OneToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
     private User user;
 }
