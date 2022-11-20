@@ -149,9 +149,16 @@ Praesent venenatis, metus a dapibus ornare, tortor tellus dapibus ex, sit amet m
     <changeSet id="0.6" author="mvgrebenyuk">
         <sql>
             CREATE TABLE favorites_to_user (
-                                  trip_id uuid not null references trip(id),
-                                  user_details_id uuid references user_details(id),
-                                  primary key (user_details_id, trip_id)
+                                  trip_id uuid not null,
+                                  user_details_id uuid,
+                                  CONSTRAINT trip_to_id
+                                      FOREIGN KEY (trip_id)
+                                        references trip(id)
+                                          ON DELETE CASCADE,
+                                  CONSTRAINT user_details_id
+                                      FOREIGN KEY (user_details_id)
+                                          references user_details(id)
+                                  ON DELETE CASCADE
             );
         </sql>
     </changeSet>

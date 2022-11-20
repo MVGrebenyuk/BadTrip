@@ -58,31 +58,31 @@ public class TripSpecification {
             //ToDo
         }
         if(filter.getCountry() != null){
-            specification = TripSpecification.countryLike(filter.getCountry());
+            specification = specification.and(TripSpecification.countryLike(filter.getCountry()));
         }
         if(filter.getRegion() != null){
-            specification = TripSpecification.regionLike(filter.getRegion());
+            specification = specification.and(TripSpecification.regionLike(filter.getRegion()));
         }
         if(filter.getDurationMin() != null){
-            specification = TripSpecification.durationGreaterOrEqualsThan(filter.getDurationMin());
+            specification = specification.and(TripSpecification.durationGreaterOrEqualsThan(filter.getDurationMin()));
         }
         if(filter.getDurationMax() != null){
-            specification = TripSpecification.durationLessOrEqualsThan(filter.getDurationMax());
+            specification = specification.and(TripSpecification.durationLessOrEqualsThan(filter.getDurationMax()));
         }
         if(filter.getPriceMax() != null){
-            specification = TripSpecification.priceLessOrEqualsThan(filter.getPriceMax());
+            specification = specification.and(TripSpecification.priceLessOrEqualsThan(filter.getPriceMax()));
         }
         if(filter.getPriceMin() != null){
-            specification = TripSpecification.priceGreaterOrEqualsThan(filter.getPriceMin());
+            specification = specification.and(TripSpecification.priceGreaterOrEqualsThan(filter.getPriceMin()));
         }
         if(filter.getLengthMax() != null){
-            specification = TripSpecification.lengtheLessOrEqualsThan(filter.getLengthMax());
+            specification = specification.and(TripSpecification.lengtheLessOrEqualsThan(filter.getLengthMax()));
         }
         if(filter.getLengthMin() != null){
-            specification = TripSpecification.lengthGreaterOrEqualsThan(filter.getLengthMin());
+            specification = specification.and(TripSpecification.lengthGreaterOrEqualsThan(filter.getLengthMin()));
         }
         if(filter.getLevel() != null){
-            specification = TripSpecification.levelIs(filter.getLevel());
+            specification = specification.and(TripSpecification.levelIs(filter.getLevel()));
         }
         if(filter.getCity() != null){
             //ToDo

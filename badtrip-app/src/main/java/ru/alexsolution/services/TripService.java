@@ -90,11 +90,13 @@ public class TripService {
         return tripDto;
     }
 
+    @Transactional
     public void createTrip(Principal principal, TripDto createTripDto) {
         User user = userService.findByLogin(principal.getName())
                 .orElseThrow(() -> new RuntimeException("Cannot find author"));
         Trip trip = toEntity(createTripDto, user);
-        repository.save(trip);
+        trip = repository.save(trip);
+        addToPurchased(user.getLogin(), trip.getId());
     }
 
     public List<Trip> getTripByAuthor(UUID author){

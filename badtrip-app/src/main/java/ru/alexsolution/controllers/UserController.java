@@ -20,6 +20,9 @@ public class UserController {
 
     @GetMapping
     public User getUser(Principal principal){
+        if(principal == null){
+            return null;
+        }
         return service.findByLogin(principal.getName()).orElseThrow();
     }
 

@@ -29,7 +29,7 @@ public class Trip {
 
     private String shortTitle;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "author_id")
     private User author;
 

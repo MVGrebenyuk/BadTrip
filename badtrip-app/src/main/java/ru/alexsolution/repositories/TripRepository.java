@@ -1,9 +1,11 @@
 package ru.alexsolution.repositories;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 import ru.alexsolution.entity.Trip;
 
 import java.math.BigDecimal;

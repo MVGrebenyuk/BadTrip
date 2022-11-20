@@ -15,6 +15,7 @@ import ru.alexsolution.services.TripService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -42,7 +43,8 @@ public class TripController {
     @GetMapping("/{id}")
     @Operation(summary = "Получить тур по id")
     private TripDto getTripById(Principal principal, @PathVariable UUID id){
-        return service.findTripById(principal.getName(), id);
+        String name = Optional.ofNullable(principal).isPresent() ? principal.getName() : null;
+        return service.findTripById(name, id);
     }
 
     @DeleteMapping("/{id}/delete")
