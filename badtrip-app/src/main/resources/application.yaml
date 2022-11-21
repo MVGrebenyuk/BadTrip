@@ -12,23 +12,20 @@ spring:
           google:
             client-id: 526207653680-ur5damesp4j96hafkfjcja7tsm32drds.apps.googleusercontent.com
             client-secret: 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
-  h2:
-    console:
-      path: /h2
-      enabled: true
+
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
     contexts: audit
     default-schema: public
   jpa:
-    database: h2
+    database: postgresql
     hibernate:
       ddl-auto: validate
   datasource:
-    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456Vv
+    driver-class-name: org.postgresql.Driver
 
 openapi:
   security:
