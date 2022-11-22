@@ -236,7 +236,9 @@ public class TripService {
 
     @Transactional
     public void deleteTripById(UUID id) {
-       repository.deleteById(id);
+        repository.deleteFromPurchasedById(id);
+        repository.deleteFromFavoriteById(id);
+        repository.deleteById(id);
     }
 
     @Transactional

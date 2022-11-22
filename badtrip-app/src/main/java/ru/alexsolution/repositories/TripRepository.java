@@ -37,9 +37,13 @@ public interface TripRepository extends JpaRepository<Trip, UUID> , JpaSpecifica
     @Query("select max(t.duration) from trip t")
     Integer findMaxDuration();
 
-    @Query(value = "DELETE FROM purchased_to_user where trip_id in(?1); " +
-            "DELETE FROM favorites_to_user where trip_id in(?1);" +
-            "DELETE FROM trip where id in(?1)",nativeQuery = true)
+    @Query(value = "DELETE FROM purchased_to_user where trip_id in(?1);", nativeQuery = true)
+    void deleteFromPurchasedById(UUID id);
+
+    @Query(value = "DELETE FROM favorites_to_user where trip_id in(?1);", nativeQuery = true)
+    void deleteFromFavoriteById(UUID id);
+
+    @Query(value = "DELETE FROM trip where id in(?1)", nativeQuery = true)
     void deleteById(UUID id);
 
     @Query("select min(t.duration) from trip t")
