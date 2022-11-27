@@ -98,7 +98,7 @@ public class TripController {
 
     @PostMapping
     @Operation(summary = "Создать тур")
-    private void createTrip(Principal principal, @RequestBody TripDto trip){
-        service.createTrip(principal, trip);
+    private UUID createTrip(Principal principal, @RequestBody TripDto trip){
+        return service.createTrip(principal, trip);
     }
 }
