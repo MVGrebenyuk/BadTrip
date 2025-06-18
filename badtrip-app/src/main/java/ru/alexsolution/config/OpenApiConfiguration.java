@@ -30,7 +30,6 @@ public class OpenApiConfiguration {
                         )
                 )
                 .info(new Info().title(applicationName.toUpperCase(Locale.ROOT)).version(apiVersion)
-                        .description("You need set Authorization token from FRKK request POST https://frkk-dso.apps.ds1-genr01.corp.dev.vtb/login " +
-                                "with body: username=director_ca&password=password"));
+                        .description(""));
     }
 }

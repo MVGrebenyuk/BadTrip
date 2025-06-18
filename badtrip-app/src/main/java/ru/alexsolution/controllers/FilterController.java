@@ -1,5 +1,6 @@
 package ru.alexsolution.controllers;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import ru.alexsolution.services.TripService;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "FILTER API", description = "Контроллер для работы с фильтрами")
+@Hidden
 public class FilterController {
     private final TripService tripService;
 

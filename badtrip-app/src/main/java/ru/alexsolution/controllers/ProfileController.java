@@ -21,7 +21,7 @@ public class ProfileController {
     private final UserService userService;
 
     @PostMapping("/register")
-    @Operation(summary = "Добавить пользователя")
+    @Operation(summary = "Регистрация пользователя")
     public User registration(@RequestBody RegistrationDto registrationDto){
         return userService.saveNewUser(registrationDto);
     }

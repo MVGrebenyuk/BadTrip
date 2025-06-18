@@ -1,5 +1,6 @@
 package ru.alexsolution.controllers;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "TRIP API", description = "Контроллер для работы с трипами")
+@Hidden
 public class TripController {
 
     private final TripService service;
